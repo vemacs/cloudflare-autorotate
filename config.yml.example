@@ -1,0 +1,5 @@
+email: 'me@example.com'
+api-key: 'my cloudflare api key here'
+domain: 'myshittyserver.com'
+entry: 'play.myshittyserver.com'
+ips: ['192.198.420.69', '127.0.0.1']
