@@ -1,5 +1,5 @@
 from pyflare import PyflareClient
-import mcstatus, yaml
+import mcstatus, yaml, threading
 
 with open('config.yml', 'r') as cfg_file:
     config = yaml.load(cfg_file)
@@ -44,10 +44,15 @@ def update_entries_with_available(records, results):
             print 'Removing obselete IP ' + ip + ' from entries (id ' + records[ip] +')'
             cf.rec_delete(domain, records[ip])
 
-slp_results = get_slp_results(ip_pool)
-cf_records = get_records_for_name(entry)
+def schedule_update():
+    print 'Running periodic update task'
+    threading.Timer(15, schedule_update).start()
+    slp_results = get_slp_results(ip_pool)
+    cf_records = get_records_for_name(entry)
+    update_entries_with_available(cf_records, slp_results)
 
-# print slp_results
-# print cf_records
+try:
+    schedule_update()
+except KeyboardInterrupt:
+    sys.exit(0)
 
-update_entries_with_available(cf_records, slp_results)
