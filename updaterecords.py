@@ -34,7 +34,7 @@ def update_entries_with_available(records, results):
         if results[ip]:
             if ip not in records:
                 print 'Adding ' + ip + ' to entries'
-                cf.rec_new(domain, 'A', 'sub', ip)
+                cf.rec_new(domain, 'A', entry.split(".")[0], ip)
         else:
             if ip in records:
                 print 'Removing ' + ip + ' from entries (id ' + records[ip] +')'
