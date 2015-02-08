@@ -31,6 +31,7 @@ def get_records_for_name(name):
 
 def update_entries_with_available(records, results):
     if len(results) == 0:
+        print 'No IPs pingable, server could be restarting or totally downed.'
         return
     for ip in results.keys():
         if results[ip]:
