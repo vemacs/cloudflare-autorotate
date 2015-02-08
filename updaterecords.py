@@ -29,8 +29,14 @@ def get_records_for_name(name):
             records[str(entry['display_content'])] = str(entry['rec_id'])
     return records
 
+def dict_all_false_values(testdict):
+    for value in testdict.values():
+        if value:
+            return False
+    return True
+
 def update_entries_with_available(records, results):
-    if len(results) == 0:
+    if dict_all_false_values(results):
         print 'No IPs pingable, server could be restarting or totally downed.'
         return
     for ip in results.keys():
