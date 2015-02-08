@@ -30,6 +30,8 @@ def get_records_for_name(name):
     return records
 
 def update_entries_with_available(records, results):
+    if len(results) == 0:
+        return
     for ip in results.keys():
         if results[ip]:
             if ip not in records:
@@ -46,7 +48,7 @@ def update_entries_with_available(records, results):
 
 def schedule_update():
     print 'Running periodic update task'
-    threading.Timer(15, schedule_update).start()
+    threading.Timer(45, schedule_update).start()
     slp_results = get_slp_results(ip_pool)
     cf_records = get_records_for_name(entry)
     update_entries_with_available(cf_records, slp_results)
