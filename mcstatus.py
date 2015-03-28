@@ -23,7 +23,7 @@ import socket
 import struct
 
 DEFAULT_PORT = 25565
-TIMEOUT_SEC = 1
+TIMEOUT_SEC = 2
 
 
 class McServer:
